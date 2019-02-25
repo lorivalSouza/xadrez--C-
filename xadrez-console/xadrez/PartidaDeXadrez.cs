@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using tabuleiro;
 using tabuleiro.exceptions;
+using System;
 
 namespace xadrez
 {
@@ -145,16 +146,57 @@ namespace xadrez
 
             Peca p = tab.peca(destino);
 
-            // #jogadaespecial promocao
+            // #jogadaespecial promocao para finalização do projeto finalizando com a escolha automática da Rainha.
             if (p is Peao)
             {
                 if ((p.cor == Cor.Branca && destino.linha == 0) || (p.cor == Cor.Preta && destino.linha == 7))
                 {
-                    p = tab.retirarPeca(destino);
-                    pecas.Remove(p);
-                    Peca dama = new Dama(tab, p.cor);
-                    tab.colocarPeca(dama, destino);
-                    pecas.Add(dama);
+                    Console.WriteLine("Escolha a peça para Promoção(B/T/C/D): ");
+                    String opcao = Console.ReadLine();
+
+                    if (opcao == "D" || opcao == "d")
+                    {
+                        p = tab.retirarPeca(destino);
+                        pecas.Remove(p);
+                        Peca dama = new Dama(tab, p.cor);
+                        tab.colocarPeca(dama, destino);
+                        pecas.Add(dama);
+                    }
+                    else if (opcao == "T" || opcao == "t")
+                    {
+                        p = tab.retirarPeca(destino);
+                        pecas.Remove(p);
+                        Peca torre = new Torre(tab, p.cor);
+                        tab.colocarPeca(torre, destino);
+                        pecas.Add(torre);
+                    }
+                    else if (opcao == "B" || opcao == "b")
+                    {
+
+
+                        p = tab.retirarPeca(destino);
+                        pecas.Remove(p);
+                        Peca bispo = new Bispo(tab, p.cor);
+                        tab.colocarPeca(bispo, destino);
+                        pecas.Add(bispo);
+                    }
+                    else if (opcao == "C" || opcao == "c")
+                    {
+                        p = tab.retirarPeca(destino);
+                        pecas.Remove(p);
+                        Peca cavalo = new Cavalo(tab, p.cor);
+                        tab.colocarPeca(cavalo, destino);
+                        pecas.Add(cavalo);
+                    }
+                    else
+                    {
+                        p = tab.retirarPeca(destino);
+                        pecas.Remove(p);
+                        Peca dama = new Dama(tab, p.cor);
+                        tab.colocarPeca(dama, destino);
+                        pecas.Add(dama);
+                    }
+                    
                 }
             }
 
